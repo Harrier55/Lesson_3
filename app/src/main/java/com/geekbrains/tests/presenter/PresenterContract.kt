@@ -1,3 +1,9 @@
 package com.geekbrains.tests.presenter
 
-internal interface PresenterContract {}
+import android.view.View
+import com.geekbrains.tests.view.ViewContract
+
+internal interface PresenterContract {
+    fun attachView(view: ViewContract)
+    fun detachView()
+}
