@@ -19,7 +19,7 @@ class DetailsActivity : AppCompatActivity(), ViewDetailsContract {
         setContentView(R.layout.activity_details)
         setUI()
 
-        presenter.attachView(this)
+        presenter.onAttachView(this)
     }
 
     private fun setUI() {
@@ -51,7 +51,7 @@ class DetailsActivity : AppCompatActivity(), ViewDetailsContract {
     }
 
     override fun onStop() {
-        presenter.detachView()
+        presenter.onDetachView()
         super.onStop()
     }
 }

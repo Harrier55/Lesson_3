@@ -1,14 +1,17 @@
 package com.geekbrains.tests
 
+import android.view.View
 import com.geekbrains.tests.model.SearchResponse
 import com.geekbrains.tests.model.SearchResult
 import com.geekbrains.tests.presenter.search.SearchPresenter
 import com.geekbrains.tests.repository.GitHubRepository
+import com.geekbrains.tests.view.search.MainActivity
 import com.geekbrains.tests.view.search.ViewSearchContract
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
+import org.mockito.Mockito
 import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
 import retrofit2.Response
@@ -24,6 +27,8 @@ class SearchPresenterTest {
     @Mock
     private lateinit var viewContract: ViewSearchContract
 
+
+
     @Before
     fun setUp() {
         //Обязательно для аннотаций "@Mock"
@@ -31,6 +36,8 @@ class SearchPresenterTest {
         MockitoAnnotations.initMocks(this)
         //Создаем Презентер, используя моки Репозитория и Вью, проинициализированные строкой выше
         presenter = SearchPresenter(viewContract, repository)
+
+
     }
 
     @Test //Проверим вызов метода searchGitHub() у нашего Репозитория
@@ -40,6 +47,7 @@ class SearchPresenterTest {
         presenter.searchGitHub("some query")
         //Убеждаемся, что все работает как надо
         verify(repository, times(1)).searchGithub(searchQuery, presenter)
+
     }
 
     @Test //Проверяем работу метода handleGitHubError()
@@ -147,6 +155,8 @@ class SearchPresenterTest {
         presenter.handleGitHubResponse(response)
 
         //Убеждаемся, что ответ от сервера обрабатывается корректно
-        verify(viewContract, times(1)).displaySearchResults(searchResults, 101)
+       verify(viewContract, times(1)).displaySearchResults(searchResults, 101)
+
+
     }
 }
